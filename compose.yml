@@ -1,0 +1,16 @@
+services:
+    database:
+        image: docker.io/mongodb/mongodb-community-server
+        container_name: lintechdb
+        environment:
+            - MONGODB_INITDB_ROOT_USERNAME=admin
+            - MONGODB_INITDB_ROOT_PASSWORD=admin
+        ports:
+            - "27017:27017"
+        volumes:
+            - /home/titas/database/mongo/lintechdb/:/data/db:z
+        command: ["mongod", "--bind_ip", "0.0.0.0"]
+        networks:
+            - lintech-net
+networks:
+    lintech-net: {}
