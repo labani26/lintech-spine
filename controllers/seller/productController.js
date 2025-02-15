@@ -7,7 +7,7 @@ const TotalPrice = require("../../models/seller/TotalPrice");
 
 exports.addProduct = async (req, res) => {
     try {
-        const { name, modelNumber, vendor, category, price, details, quantity } = req.body;
+        const { name, modelNumber, image, vendor, category, price, details, quantity } = req.body;
         const sellerId = req.user._id;
 
         // Check if the category exists; if not, create it
@@ -39,6 +39,7 @@ exports.addProduct = async (req, res) => {
             const newProduct = new Product({
                 name,
                 modelNumber,
+                image,
                 vendor,
                 category: categoryDoc._id, // Save the category ID
                 price,
