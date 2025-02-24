@@ -27,7 +27,7 @@ app.use("/api/customer", customerAuthRoutes);
 //Product
 app.use("/api/seller/product", sellerProdRoutes);
 app.use("/api/customer/product", customerProdRoutes);
-
+app.use('/uploads', express.static('uploads'));
 //Order
 app.use("/api/customer/order", orderApis);
 
