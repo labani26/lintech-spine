@@ -48,7 +48,7 @@ exports.customerSignIn = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
-        const token = jwt.sign({ id: customer._id, role: customer.role, address: customer.address }, process.env.CUST_SECRET, {
+        const token = jwt.sign({ id: customer._id, role: customer.role, address: customer.address, name:customer.name }, process.env.CUST_SECRET, {
             expiresIn: "1h"
         });
 
@@ -59,5 +59,21 @@ exports.customerSignIn = async (req, res) => {
         })
     } catch (error) {
         res.status(500).json({ success: false, message: "Server error", error: error.message });
+    }
+};
+
+// This will be your controller to fetch customer details
+exports.getCustomerDetails = (req, res) => {
+    try {
+        const customer = req.user;  // 'user' contains customer details from the JWT token
+
+        // Return the customer details (which are inside the decoded token)
+        return res.status(200).json({
+            success: true,
+            message: "Customer details fetched successfully",
+            customer
+        });
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
