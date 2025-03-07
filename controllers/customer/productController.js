@@ -63,3 +63,19 @@ exports.getProductByModel = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
+
+exports.getProductById = async (req, res) => {
+    const productId = req.params.id;
+    console.log(productId);
+    try {
+        const product = await Product.findOne({ _id: productId });  // Use findOne() for a single match
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found with id: ' + productId });
+        }
+        console.log("Returned product for id " + productId + " : \n", product);
+        res.status(200).json(product);  // Return the single product
+    } catch (error) {
+        console.error(error);  // Logging the error for debugging
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
