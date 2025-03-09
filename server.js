@@ -18,7 +18,8 @@ const sellerAuthRoutes = require("./routes/seller/authRoutes");
 const sellerProdRoutes = require("./routes/seller/productRoutes");
 const customerAuthRoutes = require("./routes/customer/authRoutes");
 const customerProdRoutes = require("./routes/customer/productRoutes");
-const orderApis = require('./routes/customer/orderRoutes')
+const orderApis = require('./routes/customer/orderRoutes');
+const onshoporder = require('./routes/admin/shopOrderRoute')
 //Authentication
 app.use("/api/admin/auth", adminAuthRoutes);
 app.use("/api/seller/auth", sellerAuthRoutes);
@@ -30,6 +31,7 @@ app.use("/api/customer/product", customerProdRoutes);
 app.use('/uploads', express.static('uploads'));
 //Order
 app.use("/api/customer/order", orderApis);
+app.use("/api/admin/onshoporder", onshoporder)
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
